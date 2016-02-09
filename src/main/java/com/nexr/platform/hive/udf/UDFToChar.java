@@ -96,14 +96,14 @@ public class UDFToChar extends UDF {
 	public Text evaluate(NullWritable i) {
 		return null;
 	}
-	
+
 	public Text evaluate(ByteWritable i) {
 		if (i == null) {
 			return null;
 		} else {
 			out.reset();
 			LazyInteger.writeUTF8NoException(out, i.get());
-			result.set(out.getData(), 0, out.getCount());
+			result.set(out.getData(), 0, out.getLength());
 			return result;
 		}
 	}
@@ -124,11 +124,11 @@ public class UDFToChar extends UDF {
 		} else {
 			out.reset();
 			LazyInteger.writeUTF8NoException(out, i.get());
-			result.set(out.getData(), 0, out.getCount());
+			result.set(out.getData(), 0, out.getLength());
 			return result;
 		}
 	}
-	
+
 	public Text evaluate(ShortWritable i, Text format) {
 		if (i == null|| format==null) {
 			return null;
@@ -146,11 +146,11 @@ public class UDFToChar extends UDF {
 		} else {
 			out.reset();
 			LazyInteger.writeUTF8NoException(out, i.get());
-			result.set(out.getData(), 0, out.getCount());
+			result.set(out.getData(), 0, out.getLength());
 			return result;
 		}
 	}
-	
+
 	public Text evaluate(IntWritable i, Text format) {
 		if (i == null|| format==null) {
 			return null;
@@ -168,11 +168,11 @@ public class UDFToChar extends UDF {
 		} else {
 			out.reset();
 			LazyLong.writeUTF8NoException(out, i.get());
-			result.set(out.getData(), 0, out.getCount());
+			result.set(out.getData(), 0, out.getLength());
 			return result;
 		}
 	}
-	
+
 	public Text evaluate(LongWritable i, Text format) {
 		if (i == null|| format==null) {
 			return null;
@@ -192,8 +192,8 @@ public class UDFToChar extends UDF {
 			return result;
 		}
 	}
-	
-	
+
+
 	public Text evaluate(FloatWritable i, Text format) {
 		if (i == null|| format==null) {
 			return null;
@@ -213,7 +213,7 @@ public class UDFToChar extends UDF {
 			return result;
 		}
 	}
-	
+
 	public Text evaluate(DoubleWritable i, Text format) {
 		if (i == null|| format==null) {
 			return null;
@@ -224,7 +224,7 @@ public class UDFToChar extends UDF {
 			return result;
 		}
 	}
-	
+
 	public Text evaluate(Text dateText, Text patternText) {
 		if (dateText == null || patternText == null) {
 			return null;
@@ -232,7 +232,7 @@ public class UDFToChar extends UDF {
 		if (dateText.toString().trim().length()==10){
 			standardFormatter.applyPattern("yyyy-MM-dd");
 		}
-		
+
 		try {
 			if (!patternText.equals(lastPatternText)) {
 				formatter.applyPattern(patternText.toString());
@@ -251,9 +251,9 @@ public class UDFToChar extends UDF {
 			return null;
 		}
 	}
-	
+
 	public Text evaluate(Text text){
 		return text;
 	}
-	
+
 }
